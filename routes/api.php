@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\NoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +24,9 @@ Route::get('/greeting', function() {
 	return 'Hello world';
 });
 
+// route for register
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
 // route for Note
-Route::get('Note', 'NoteController@index')->name('note.index');
-Route::get('Note/{id}', 'NoteController@show')->name('note.show');
-Route::post('Note', 'NoteController@store')->name('note.store');
-Route::put('Note/{id}', 'NoteController@update')->name('note.update');
-Route::delete('Note/{id}', 'NoteController@destroy')->name('note.destroy');
+Route::apiResource('note', NoteController::class)->middleware('auth:api');
