@@ -22,7 +22,9 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => '1',
+            'title' => $faker->word(),
+            'note' => $faker->paragraph(4)
         ];
     }
 }
