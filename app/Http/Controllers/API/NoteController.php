@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use App\Http\Resources\NoteResource;
+use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
 {
@@ -15,7 +17,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        $notes = Note::all();
+        return response([ 'note' => NoteResource::collection($notes), 'message' => 'Retrieved successfully'], 200);
     }
 
     /**
@@ -26,7 +29,20 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'title' => 'required|max:50',
+            'note' => 'max:1000', 
+        ]);
+
+        if ($validator->fails()) {
+            return response(['error' => $validator->errors(), 'Validation Error']);
+        }
+
+        $note = Note::create($data);
+
+        return response(['note' => new NoteResource($note), 'message' => 'Created successfully'], 201);
     }
 
     /**
@@ -37,7 +53,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        return response(['note' => new NoteResource($note), 'message' => 'Retrieved successfully'], 200);
     }
 
     /**
@@ -49,7 +65,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $note->update($request->all());
+
+        return response(['note' => new NoteResource($note), 'message' => 'Update successfully'], 200);
     }
 
     /**
@@ -60,6 +78,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->delete();
+
+        return response(['message' => 'Deleted']);
     }
 }
