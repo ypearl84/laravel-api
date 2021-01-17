@@ -23,8 +23,8 @@ Route::get('/greeting', function() {
 });
 
 // route for Note
-Route::get('note', 'NoteController@index')->name('note.index');
-Route::get('note/{id}', 'NoteController@show')->name('note.show');
-Route::post('note', 'NoteController@store')->name('note.store');
-Route::put('note/{id}', 'NoteController@update')->name('note.update');
-Route::delete('note/{id}', 'NoteController@destroy')->name('note.destroy');
+Route::get('Note', 'NoteController@index')->name('note.index');
+Route::get('Note/{id}', 'NoteController@show')->name('note.show');
+Route::post('Note', 'NoteController@store')->name('note.store');
+Route::put('Note/{id}', 'NoteController@update')->name('note.update');
+Route::delete('Note/{id}', 'NoteController@destroy')->name('note.destroy');
