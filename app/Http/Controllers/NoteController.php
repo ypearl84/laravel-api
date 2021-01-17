@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Note;
 
 class NoteController extends Controller
 {
@@ -13,7 +14,10 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        // $allNotes = Note::select('id', 'title', 'note')->get();
+        $allNotes = Note::all();
+        $filteredNotes = NoteResource::collection($allNotes);
+        return $filteredNotes;
     }
 
     /**
@@ -34,7 +38,10 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all(); 
+        $note = Note::create($data);
+
+        return new NoteResource($note);
     }
 
     /**
@@ -45,7 +52,9 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $filteredNotes = new TodoResource($id);
+
+        return $filteredNotes;
     }
 
     /**
@@ -68,7 +77,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $note->update($request->all());
+
+        return new TodoResource($todo);
     }
 
     /**
