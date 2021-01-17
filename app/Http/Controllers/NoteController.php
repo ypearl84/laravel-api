@@ -16,8 +16,8 @@ class NoteController extends Controller
     {
         // $allNotes = Note::select('id', 'title', 'note')->get();
         $allNotes = Note::all();
-        $filteredNotes = NoteResource::collection($allNotes);
-        return $filteredNotes;
+        //$filteredNotes = NoteResource::collection($allNotes);
+        return $allNotes;
     }
 
     /**
@@ -52,9 +52,8 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        $filteredNotes = new TodoResource($id);
-
-        return $filteredNotes;
+        $fetchedNote = Note::find($id);
+    return $fetchedNote;
     }
 
     /**
@@ -77,9 +76,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $note->update($request->all());
-
-        return new TodoResource($todo);
+        $fetchedNote = Note::find($id);
+        $fetchedNote->update($request->all()); 
+        return $fetchedNote;
     }
 
     /**
@@ -90,6 +89,8 @@ class NoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fetchedNote = Note::find($id);
+        $fetchedNote->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
