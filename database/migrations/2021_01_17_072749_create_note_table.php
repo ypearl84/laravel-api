@@ -16,7 +16,7 @@ class CreateNoteTable extends Migration
         Schema::create('Note', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('user_id');
-	    $table->string('title', 50);
+	        $table->string('title', 50);
             $table->string('note', 1000)->nullable();
             $table->date('create_time');
             $table->date('last_update_time');
