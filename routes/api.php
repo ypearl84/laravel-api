@@ -21,3 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/greeting', function() {
 	return 'Hello world';
 });
+
+// route for Note
+Route::get('note', 'NoteController@index')->name('note.index');
+Route::get('note/{id}', 'NoteController@show')->name('note.show');
+Route::post('note', 'NoteController@store')->name('note.store');
+Route::put('note/{id}', 'NoteController@update')->name('note.update');
+Route::delete('note/{id}', 'NoteController@destroy')->name('note.destroy');
