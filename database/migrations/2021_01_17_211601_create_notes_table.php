@@ -19,7 +19,7 @@ class CreateNotesTable extends Migration
 	        $table->string('title', 50);
             $table->string('note', 1000)->nullable();
             $table->date('created_at');
-            $table->date('updateed_at');
+            $table->date('updated_at');
         });
     }
 
