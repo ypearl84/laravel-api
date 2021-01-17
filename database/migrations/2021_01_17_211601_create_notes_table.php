@@ -18,8 +18,8 @@ class CreateNotesTable extends Migration
             $table->string('user_id');
 	        $table->string('title', 50);
             $table->string('note', 1000)->nullable();
-            $table->date('create_time');
-            $table->date('last_update_time');
+            $table->date('created_at');
+            $table->date('updateed_at');
         });
     }
 
