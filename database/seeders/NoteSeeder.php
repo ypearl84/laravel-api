@@ -14,6 +14,6 @@ class NoteSeeder extends Seeder
     public function run()
     {
     	// make fake note data
-	factory(App\Note::class, 10)->create();
+        \App\Models\Note::factory()->count(30)->create(); 
     }
 }

@@ -23,8 +23,8 @@ class NoteFactory extends Factory
     {
         return [
             'user_id' => '1',
-            'title' => $faker->word(),
-            'note' => $faker->paragraph(4)
+            'title' => $this->faker->text(10),
+            'note' => $this->faker->text(100)
         ];
     }
 }
