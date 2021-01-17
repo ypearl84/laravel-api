@@ -13,7 +13,8 @@ class NoteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // fake login
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class NoteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:1|max:50',
+            'note' => 'max:1000'
         ];
     }
 }
