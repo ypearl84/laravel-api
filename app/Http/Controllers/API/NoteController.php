@@ -30,6 +30,7 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $userId = $request->user()->id;
 
         $validator = Validator::make($data, [
             'title' => 'required|max:50',
@@ -40,6 +41,7 @@ class NoteController extends Controller
             return response(['error' => $validator->errors(), 'Validation Error']);
         }
 
+        $data['user_id'] = $userId;
         $note = Note::create($data);
 
         return response(['note' => new NoteResource($note), 'message' => 'Created successfully'], 201);
